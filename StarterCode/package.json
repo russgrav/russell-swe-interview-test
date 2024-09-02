@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "start": "concurrently \"cd frontend && npm start\" \"cd backend && node server\"",
+  "name": "startercode",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
+    "start:frontend": "npm --prefix frontend start",
+    "start:backend": "npm --prefix backend start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
