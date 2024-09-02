@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import {
   Container,
   Card,
@@ -16,9 +17,8 @@ const ProductList = () => {
   // Fetch products from the backend
   const fetchProducts = async () => {
     try {
-      const response = await fetch("http://localhost:5001/api/products");
-      const data = await response.json();
-      setProducts(data);
+      const response = await axios.get("http://localhost:5001/api/products");
+      setProducts(response.data);
     } catch (error) {
       console.error("Error fetching products:", error);
     }
@@ -27,9 +27,7 @@ const ProductList = () => {
   // Delete a product
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:5001/api/products/${id}`, {
-        method: "DELETE",
-      });
+      await axios.delete(`http://localhost:5001/api/products/${id}`);
       setProducts(products.filter((product) => product.id !== id)); // Remove from frontend
     } catch (error) {
       console.error("Error deleting product:", error);
@@ -41,11 +39,39 @@ const ProductList = () => {
   }, []);
 
   return (
-    <Container>
+    <Container
+      maxWidth="md"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        marginTop: "20px",
+      }}
+    >
+      <Typography
+        variant="h4"
+        component="h1"
+        gutterBottom
+        style={{ marginBottom: "20px", fontWeight: "bold" }}
+      >
+        Simple Card List
+      </Typography>
       <Grid container spacing={2}>
         {products.map((product) => (
           <Grid item xs={12} sm={6} md={4} key={product.id}>
-            <Card>
+            <Card style={{ position: "relative" }}>
+              <IconButton
+                onClick={() => handleDelete(product.id)}
+                aria-label="delete"
+                style={{
+                  position: "absolute",
+                  top: 5,
+                  left: 5,
+                  color: "red",
+                }}
+              >
+                <DeleteIcon />
+              </IconButton>
               <CardMedia
                 component="img"
                 height="140"
@@ -62,12 +88,6 @@ const ProductList = () => {
                 <Typography variant="h6" color="text.primary">
                   ${product.price}
                 </Typography>
-                <IconButton
-                  onClick={() => handleDelete(product.id)}
-                  aria-label="delete"
-                >
-                  <DeleteIcon />
-                </IconButton>
               </CardContent>
             </Card>
           </Grid>
