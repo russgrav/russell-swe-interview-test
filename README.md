@@ -1,11 +1,7 @@
-# SWE INTERVIEW TEST 
-THIS IS TO TEST YOUR SKILLS TO MEET OUR APP DEVELOPMENT REQUIREMENTS
+# How to Launch
 
-1. Clone this repo to your local machine.
-2. Read `Assignment Requirements` carefully and follow it.
-4. Please commit your entire code to `your own Github repository` 
-5. On your repo, please add step-by-step instructions on how to launch (for both the Backend and Frontend) to the `README.md`
-6. Share your repo link with us via email.
+You can launch the frontend and backend concurrently by changing the directory to
+"StarterCode" and simply running `npm start`.
 
-HAPPY CODING! </br>
-A Round Entertainment
+Optionally, you can also run the frontend or backend independently by changing
+to the respective directory and running `npm start` from there.
